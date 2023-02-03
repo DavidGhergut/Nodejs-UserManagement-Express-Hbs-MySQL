@@ -5,13 +5,13 @@
   </ol>
 </nav>
 
-{{#if alert}}
+<% if (alert) { %>
 <div class="alert alert-success alert-dismissible fade show" role="alert">
-  {{alert}}
+  <%= alert %>
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
-{{/if}}
+<% } %>
 
 <form class="row g-3 needs-validation" method="POST" action="/adduser" novalidate>
-  {{> user-form}}
+  <%- include('partials/user-form', {first_name: '', last_name: '', email: '', phone: '', comments: ''}); %>
 </form>

@@ -25,7 +25,7 @@ exports.find = (req, res) => {
 }
 
 exports.form = (req, res) => {
-    res.render('add-user');
+    res.render('add-user', {alert: null});
 }
 
 // Add new user
