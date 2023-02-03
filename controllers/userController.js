@@ -1,5 +1,6 @@
 const Users = require('../models/User.js');
 
+// this function prints the error
 function logErr(err) {
     console.log(err);
 }
@@ -19,7 +20,7 @@ exports.find = (req, res) => {
     // User the connection
     Users.searchWithSearchTerm(searchTerm)
         .then((rows) => {
-            res.render('home', {rows});
+            res.render('home', {rows, removedUser: null});
         })
         .catch(logErr);
 }
@@ -45,7 +46,7 @@ exports.edit = (req, res) => {
     // User the connection
     Users.findUserById(req.params.id)
         .then(rows => {
-            res.render('edit-user', {rows});
+            res.render('edit-user', {rows, alert: null});
         }).catch(logErr);
 }
 
@@ -67,11 +68,9 @@ exports.delete = (req, res) => {
 
     // Delete a record
 
-    // Hide a record
-
     Users.updateUserStatus(req.params.id, 'removed')
         .then(_rows => {
-            let removedUser = encodeURIComponent('User successeflly removed.');
+            let removedUser = encodeURIComponent('User successfully removed.');
             res.redirect('/?removed=' + removedUser);
         })
         .catch(logErr)
@@ -85,4 +84,12 @@ exports.viewall = (req, res) => {
             res.render('view-user', {rows});
         })
         .catch(logErr);
+}
+
+exports.activateUser = (req, res) => {
+    Users.activateOrDeactivate(req.params.id)
+        .then(_ => {
+            res.send('done')
+        })
+        .catch(logErr)
 }

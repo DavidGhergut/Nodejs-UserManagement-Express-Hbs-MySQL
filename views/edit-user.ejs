@@ -5,15 +5,15 @@
   </ol>
 </nav>
 
-{% if (alert) { %}
+<% if (alert) { %>
   <div class="alert alert-success alert-dismissible fade show" role="alert">
-    {%= alert %}
+    <%= alert %>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
-{% } %}
+<% } %>
 
-{% for (const row of rows) { %}
+<% for (const row of rows) { %>
 <form class="row g-3 needs-validation" method="POST" action="/edituser/{%= row.id %}" novalidate>
   <%- include('partials/user-form', row) %>
 </form>
-{% } %}
+<% } %>
